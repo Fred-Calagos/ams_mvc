@@ -4,6 +4,7 @@ namespace App\controllers;
 
 use App\Core\Database;
 use App\models\Section;
+use App\Models\GradeLevel;
 use App\Core\BaseController;
 
 class SectionController extends BaseController
@@ -14,13 +15,18 @@ class SectionController extends BaseController
         $gradeId = $_GET['grade_id'] ?? null;
         $sections = $gradeId ? Section::getByGrade($gradeId) : Section::all();
 
+        // Fetch the grade name if a grade_id is present
+        $gradeName = $gradeId ? GradeLevel::find($gradeId)['grade_level'] ?? 'Unknown Grade' : null;
+
         $data = [
             'title' => 'Manage Sections',
             'sections' => $sections,
             'grade_id' => $gradeId,
+            'grade_name' => $gradeName, // Pass grade name to view
             'content' => $this->renderView('/academic/section/index', [
                 'sections' => $sections,
-                'grade_id' => $gradeId
+                'grade_id' => $gradeId,
+                'grade_name' => $gradeName
             ])
         ];
 
@@ -92,10 +98,12 @@ class SectionController extends BaseController
             $gradeId = $_POST['grade_level_id'] ?? null;
 
             if ($id && $sectionName && $gradeId) {
-                Section::update($id, [
+                $data = [
                     'section_name' => $sectionName,
                     'grade_level_id' => $gradeId
-                ]);
+                ];
+
+                Section::update($id, $data);
 
                 echo json_encode(['status' => 'success', 'message' => 'Section updated successfully.']);
                 exit;
@@ -110,23 +118,25 @@ class SectionController extends BaseController
     }
 
     // Delete a section
-    public function delete($id)
+    public function delete($id) 
     {
-        $section = Section::find($id);
-        if (!$section) {
-            $_SESSION['error'] = "Section not found.";
-            header("Location: /sections");
-            exit;
-        }
-
-        if ($section->delete()) {
-            $_SESSION['success'] = "Section deleted successfully!";
-            header("Location: /sections");
-            exit;
-        } else {
-            $_SESSION['error'] = "Failed to delete section.";
-            header("Location: /sections");
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $pdo = Database::connect();
+    
+            // Perform the delete operation
+            $deleted = Section::delete($id);
+    
+            if ($deleted) {
+                echo json_encode(["success" => true]); // ✅ Correct response key
+            } else {
+                echo json_encode(["success" => false, "message" => "Failed to delete section."]);
+            }
+    
             exit;
         }
     }
+    
+    
+
+    
 }

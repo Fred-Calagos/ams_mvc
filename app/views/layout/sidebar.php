@@ -66,7 +66,7 @@
           <li><a class="link_name" href="/academic">Academics</a></li>
           <li><a href="/academic_years">School Year</a></li>
           <li><a href="/grade">Grade and Sections</a></li>
-          <li><a href="/track_strand">Track and Strand</a></li>
+          <li><a href="/tracks">Track and Strand</a></li>
           <li><a href="/subjects">Subject</a></li>
           <li><a href="/rfid_numbers">RFID Number</a></li>
         </ul>
@@ -139,21 +139,6 @@
           <li><a class="link_name" href="/settings">Setting</a></li>
         </ul>
       </li>
-      <li>
-      <div class="profile-details">
-        <div class="profile-content">
-          <img src="image/profile.jpg" alt="profileImg">
-        </div>
-        <div class="name-job">
-          <div class="profile_name">Prem Shahi</div>
-          <div class="job">Web Designer</div>
-        </div>
-        <a href="/logout">
-          <i class='bx bx-log-out'></i>
-        </a>
-      </div>
-
-  </li>
 </ul>
   </div>
 

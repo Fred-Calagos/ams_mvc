@@ -236,6 +236,7 @@
             }
         });
     });
+    
     $(document).on('click', '.delete-year', function() {
     var id = $(this).data('id'); // Get the ID from the delete button
     var startYear = $(this).data('start-year');

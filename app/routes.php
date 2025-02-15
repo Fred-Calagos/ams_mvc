@@ -1,16 +1,18 @@
 <?php
 
-use App\controllers\AcademicCategory;
-use App\controllers\AcademicCategoryController;
 use App\Controllers\AuthController;
-use App\controllers\SectionController;
 use App\Controllers\UserController;
+use App\controllers\GradeController;
+use App\controllers\TrackController;
+use App\controllers\AcademicCategory;
+use App\controllers\SectionController;
 use App\controllers\SettingController;
 use App\Controllers\StudentController;
 use App\Controllers\AcademicController;
 use App\Controllers\DashboardController;
 use App\Controllers\AcademicYearController;
-use App\controllers\GradeController;
+use App\controllers\AcademicCategoryController;
+use App\controllers\StrandController;
 
 // LOGIN ROUTE
 $router->get('/login', [AuthController::class, 'showLogin']);
@@ -49,8 +51,19 @@ $router->get('/section/create', [SectionController::class, 'create']); // Show c
 $router->post('/section/store', [SectionController::class, 'store']);  // Store new section
 $router->get('/section/edit/{id}', [SectionController::class, 'edit']); // Show edit form
 $router->post('/section/update', [SectionController::class, 'update']); // Update section
+$router->get('/section/delete/{id}', [SectionController::class, 'delete']);
 
-// $router->post('/grade/section/delete/{id}', [SectionController::class, 'delete']); // Delete section
+// TRACK ROUTES
+$router->get('/tracks', [TrackController::class, 'index']);
+$router->post('/tracks/store', [TrackController::class, 'store']);
+$router->post('/tracks/update/{id}', [TrackController::class, 'update']);
+
+// STRAND ROUTES
+$router->get('/strand', [StrandController::class, 'index']);
+$router->post('/strand/store', [StrandController::class, 'store']);
+$router->post('/strand/update', [StrandController::class, 'update']);
+
+
 
 
 $router->get('/track_strand', [AcademicController::class, 'trackStrand']);

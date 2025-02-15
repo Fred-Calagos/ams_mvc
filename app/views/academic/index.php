@@ -22,7 +22,7 @@
 
         <div class="col-md-4">
             <div class="card position-relative">
-                <a href="/track_strand" class="stretched-link"></a>
+                <a href="/tracks" class="stretched-link"></a>
                 <div class="card-body text-center">
                     <i class='bx bxs-book bx-lg'></i>
                     <h5 class="card-title mt-2">Track and Strand</h5>

@@ -3,20 +3,20 @@
 namespace Migrations;
 
 use PDO;
-class CreateAcadLevelCat
+
+class CreateTrack
 {
-    public function up(PDO $pdo)
-    {
-        $sql = "CREATE TABLE IF NOT EXISTS acad_level_category (
+    public function up(PDO $pdo){
+        $sql = "CREATE TABLE IF NOT EXISTS tracks (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                acad_cat VARCHAR(10) NOT NULL,
+                track_name VARCHAR(100) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             );";
-
-        $pdo->exec($sql);
+            $pdo->exec($sql);
     }
+    
     public function down(PDO $pdo){
-        $pdo->exec("DROP TABLE IF EXISTS acad_level_category");
+        $pdo->exec("DROP TABLE IF EXISTS tracks");
     }
 }
